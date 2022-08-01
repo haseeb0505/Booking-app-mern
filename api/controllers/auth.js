@@ -6,7 +6,6 @@ const saltRounds = 10;
 
 const register = async (req, res, next) => {
     const hash = await bcrypt.hash(req.body.password, saltRounds);
-    // changes 
     try {
         const newUser = new User({
             ...req.body,
