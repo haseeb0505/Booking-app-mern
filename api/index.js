@@ -6,6 +6,7 @@ const userRoute = require('./routes/users');
 const roomRoute = require('./routes/rooms');
 const hotelRoute = require('./routes/hotels');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 const app = Express();
 dotenv.config();
 
@@ -19,7 +20,7 @@ connectDB = async () => {
     }
 }
 
-
+app.use(morgan('combined'));
 // middleware
 app.use(cookieParser())
 app.use(Express.json());

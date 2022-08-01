@@ -9,8 +9,7 @@ const register = async (req, res, next) => {
     // changes 
     try {
         const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
+            ...req.body,
             password: hash
 
         });
@@ -36,7 +35,7 @@ const Login = async (req, res, next) => {
                 const { password, isAdmin, ...info } = user._doc
                 res.cookie("access_token", token, {
                     httpOnly: true
-                }).status(200).json(info);
+                }).status(200).json({ details: { ...info }, isAdmin });
             } else {
                 return next(createError(404, 'Password is incorrect.'));
             }
