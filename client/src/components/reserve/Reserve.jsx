@@ -10,7 +10,7 @@ import axios from 'axios'
 
 function Reserve({ setOpen, hotelId }) {
     const [selectedRooms, setSelectedRooms] = React.useState([])
-    const { data, error, loading } = useFetch(`/hotel/room/${hotelId}`)
+    const { data, error, loading } = useFetch(`/hotels/room/${hotelId}`)
     const { dates } = useContext(SearchContext)
     const navigate = useNavigate()
 
@@ -42,7 +42,7 @@ function Reserve({ setOpen, hotelId }) {
     const handleClick = async () => {
         try {
             await Promise.all(selectedRooms.map(roomId => {
-                const res = axios.put(`/room/availibility/${roomId}`, { dates: allDates })
+                const res = axios.put(`/rooms/availibility/${roomId}`, { dates: allDates })
                 setOpen(false)
                 navigate("/")
 

@@ -25,9 +25,10 @@ app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(Express.json());
 app.use("/api/auth", authRoute);
-app.use("/api/user", userRoute);
-app.use("/api/room", roomRoute);
-app.use("/api/hotel", hotelRoute);
+app.use("/api/users", userRoute);
+app.use("/api/rooms", roomRoute);
+app.use("/api/hotels", hotelRoute);
+
 
 // Error Middleware
 app.use((err, req, res, next) => {
@@ -39,6 +40,7 @@ app.use((err, req, res, next) => {
         Message: message
     });
 })
+
 
 app.listen(8800, () => {
     connectDB();

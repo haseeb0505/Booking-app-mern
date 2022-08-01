@@ -16,6 +16,11 @@ const userSchema = new mongoose.Schema({
         required: true
 
     },
+    city: {
+        type: String,
+        required: true
+
+    },
     phone: {
         type: String,
         required: true,

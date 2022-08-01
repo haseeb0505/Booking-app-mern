@@ -6,4 +6,4 @@ const createError = (statusCode, message) => {
 
 }
 
-module.exports = createError;
+module.exports = { createError }

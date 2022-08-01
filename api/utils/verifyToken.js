@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
-const createError = require("./error");
+const { createError } = require("./error");
 
 const verifyToken = async (req, res, next) => {
-
     const token = req.cookies.access_token;
     if (!token) {
         return next(createError(401, 'you are not authenticated'));
@@ -21,22 +20,30 @@ const verifyToken = async (req, res, next) => {
 }
 
 const verifyUser = async (req, res, next) => {
-    verifyToken(req, res, next, () => {
-        if (req.user.id === req.params.id || req.user.isAdmin) {
-            next();
+    verifyToken(req, res, () => {
+        if (!req.user) {
+            return next(createError(401, 'you are not authenticated'));
         } else {
-            next(createError(403, 'you are not authorized'));
+            if (req.user.id === req.params.id || req.user.isAdmin) {
+                next();
+            } else {
+                next(createError(403, 'you are not authorized'));
+            }
         }
 
     })
 }
 
 const verifyAdmin = async (req, res, next) => {
-    verifyToken(req, res, next, () => {
-        if (req.user.isAdmin) {
-            next();
+    verifyToken(req, res, () => {
+        if (!req.user) {
+            return next(createError(401, 'you are not authenticated'));
         } else {
-            next(createError(403, 'you are not authorized'));
+            if (req.user.isAdmin) {
+                next();
+            } else {
+                next(createError(403, 'you are not allowed to do this'));
+            }
         }
 
     })

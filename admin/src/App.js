@@ -4,9 +4,10 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs } from "./formSource";
+import { roomInputs, userInputs, hotelInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
+import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 
@@ -38,7 +39,7 @@ function App() {
             <Route path="/users">
               <Route index element={
                 <ProtectedRoutes>
-                  <List />
+                  <List columns={userColumns} />
                 </ProtectedRoutes>
               } />
               <Route path=":userId" element={
@@ -54,12 +55,20 @@ function App() {
                 }
               />
             </Route>
-            <Route path="products">
-              <Route index element={<ProtectedRoutes><List /></ProtectedRoutes>} />
-              <Route path=":productId" element={<ProtectedRoutes><Single /></ProtectedRoutes>} />
+            <Route path="/hotels">
+              <Route index element={<ProtectedRoutes><List columns={hotelColumns} /></ProtectedRoutes>} />
+              <Route path=":hotelId" element={<ProtectedRoutes><Single /></ProtectedRoutes>} />
               <Route
                 path="new"
-                element={<ProtectedRoutes><New inputs={productInputs} title="Add New Product" /></ProtectedRoutes>}
+                element={<ProtectedRoutes><New inputs={hotelInputs} title="Add New Hotel" /></ProtectedRoutes>}
+              />
+            </Route>
+            <Route path="/rooms">
+              <Route index element={<ProtectedRoutes><List columns={roomColumns} /></ProtectedRoutes>} />
+              <Route path=":roomId" element={<ProtectedRoutes><Single /></ProtectedRoutes>} />
+              <Route
+                path="new"
+                element={<ProtectedRoutes><New inputs={roomInputs} title="Add New Room" /></ProtectedRoutes>}
               />
             </Route>
           </Route>
