@@ -2,7 +2,9 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
-import New from "./pages/new/New";
+import NewUser from "./pages/new user/NewUser";
+import NewRoom from "./pages/new room/NewRoom";
+import NewHotel from "./pages/new hotel/NewHotel";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { roomInputs, userInputs, hotelInputs } from "./formSource";
 import "./style/dark.scss";
@@ -50,7 +52,7 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoutes>
-                    <New inputs={userInputs} title="Add New User" />
+                    <NewUser inputs={userInputs} title="Add New User" />
                   </ProtectedRoutes>
                 }
               />
@@ -60,7 +62,7 @@ function App() {
               <Route path=":hotelId" element={<ProtectedRoutes><Single /></ProtectedRoutes>} />
               <Route
                 path="new"
-                element={<ProtectedRoutes><New inputs={hotelInputs} title="Add New Hotel" /></ProtectedRoutes>}
+                element={<ProtectedRoutes><NewHotel inputs={hotelInputs} title="Add New Hotel" /></ProtectedRoutes>}
               />
             </Route>
             <Route path="/rooms">
@@ -68,7 +70,7 @@ function App() {
               <Route path=":roomId" element={<ProtectedRoutes><Single /></ProtectedRoutes>} />
               <Route
                 path="new"
-                element={<ProtectedRoutes><New inputs={roomInputs} title="Add New Room" /></ProtectedRoutes>}
+                element={<ProtectedRoutes><NewRoom inputs={roomInputs} title="Add New Room" /></ProtectedRoutes>}
               />
             </Route>
           </Route>

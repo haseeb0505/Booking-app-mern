@@ -14,7 +14,8 @@ const Datatable = ({ columns }) => {
 
   const [list, setList] = useState([]);
 
-  const { data } = useFetch(`/${path}`)
+  const { data, loading, error } = useFetch(`/${path}`)
+
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
@@ -55,13 +56,16 @@ const Datatable = ({ columns }) => {
     },
   ];
   return (
+
     <div className="datatable">
+
       <div className="datatableTitle">
         Add New {path}
         <Link to={`/${path}/new`} className="link">
           Add New {path}
         </Link>
       </div>
+
       <DataGrid
         className="datagrid"
         rows={list}
@@ -72,6 +76,8 @@ const Datatable = ({ columns }) => {
         checkboxSelection
         getRowId={row => row._id}
       />
+
+
     </div>
   );
 };

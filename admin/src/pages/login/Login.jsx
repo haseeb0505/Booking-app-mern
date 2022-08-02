@@ -31,7 +31,8 @@ function Login() {
         navigate("/")
       } else {
 
-        dispatch({ type: "LOGIN_FAILURE", payload: { message: "you are not allowed" } })
+        dispatch({ type: "LOGIN_FAILURE", payload: { Message: "you are not allowed" } })
+
       }
 
     } catch (error) {

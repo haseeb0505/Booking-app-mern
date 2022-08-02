@@ -1,5 +1,5 @@
 const User = require('../model/User');
-const createError = require("../utils/error")
+const { createError } = require("../utils/error")
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
@@ -30,7 +30,7 @@ const Login = async (req, res, next) => {
         } else {
             const match = await bcrypt.compare(req.body.password, user.password)
             if (match) {
-                const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '5d' })
+                const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '1d' })
                 const { password, isAdmin, ...info } = user._doc
                 res.cookie("access_token", token, {
                     httpOnly: true
